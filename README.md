@@ -213,3 +213,15 @@ documented in [docs/REVERSE_ENGINEERING.md](docs/REVERSE_ENGINEERING.md).
 
 [MIT](LICENSE). Not affiliated with Elegoo or Obico. `moonraker-obico` is a
 separate GPL-3.0 project; this repository only runs its published image.
+
+## Built with AI
+
+This project was built with the help of AI, using the **DeepSeek API**
+(`deepseek-v4-flash-vision-exp`) through [opencode](https://opencode.ai).
+
+The SDCP protocol was reverse-engineered by inspecting the stock web UI and by
+capturing live traffic, and the bridge, installer and documentation were
+written iteratively by an AI assistant that ran real tests against an actual
+Centauri Carbon (status capture, webcam, pause/resume/cancel, G-code upload and
+the full Obico integration). Review the code before trusting it on your own
+hardware.
