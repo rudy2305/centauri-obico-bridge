@@ -73,7 +73,7 @@ server. This bridge translates between the two so you get:
 ## Quick install (script)
 
 ```bash
-git clone https://github.com/<your-user>/centauri-obico-bridge.git
+git clone https://github.com/absolutetheoG/centauri-obico-bridge.git
 cd centauri-obico-bridge
 ./install.sh
 ```
