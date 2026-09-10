@@ -1,0 +1,17 @@
+# Local configuration (contains your printer IP and Obico token)
+.env
+config/moonraker-obico.cfg
+
+# Runtime data (raw SDCP captures, moonraker-obico logs)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Misc
+.DS_Store
+*.zip

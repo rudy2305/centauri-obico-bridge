@@ -1,0 +1,27 @@
+# Bridge only. Use this when moonraker-obico is already running somewhere
+# else (another host, another container, a systemd service, ...).
+#
+#   1. cp .env.example .env   (set CENTAURI_HOST)
+#   2. docker compose -f docker-compose.bridge-only.yml up -d --build
+#
+# The Moonraker-compatible API is then available on http://<host>:7125 and
+# the camera on /webcam/stream and /webcam/snapshot.
+
+name: centauri-obico
+
+services:
+  centauri-bridge:
+    build: .
+    image: centauri-obico-bridge:local
+    container_name: centauri-bridge
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MOONRAKER_PORT: "7125"
+      POLL_INTERVAL: "2"
+      SDCP_RAW_LOG: /data/sdcp_raw.jsonl
+    ports:
+      - "7125:7125"
+    volumes:
+      - ./data/bridge:/data

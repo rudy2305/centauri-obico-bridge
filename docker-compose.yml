@@ -1,0 +1,53 @@
+# All-in-one stack: SDCP bridge + moonraker-obico agent.
+#
+#   1. cp .env.example .env   (set CENTAURI_HOST and OBICO_SERVER_URL)
+#   2. cp config/moonraker-obico.cfg.template config/moonraker-obico.cfg
+#      (or simply run ./install.sh which does both)
+#   3. docker compose up -d --build
+#
+# If you already run moonraker-obico elsewhere, use
+# docker-compose.bridge-only.yml instead.
+
+name: centauri-obico
+
+services:
+  centauri-bridge:
+    build: .
+    image: centauri-obico-bridge:local
+    container_name: centauri-bridge
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MOONRAKER_PORT: "7125"
+      POLL_INTERVAL: "2"
+      SDCP_RAW_LOG: /data/sdcp_raw.jsonl
+    ports:
+      - "7125:7125"
+    volumes:
+      - ./data/bridge:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import urllib.request;
+          urllib.request.urlopen('http://127.0.0.1:7125/health')"
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  moonraker-obico:
+    image: ghcr.io/thespaghettidetective/moonraker-obico:latest
+    container_name: moonraker-obico
+    restart: unless-stopped
+    # The agent needs host networking for Janus/WebRTC and to reach the bridge
+    # on 127.0.0.1:7125. privileged is required by the upstream image.
+    network_mode: host
+    privileged: true
+    depends_on:
+      centauri-bridge:
+        condition: service_healthy
+    volumes:
+      - ./config:/opt/printer_data/config
+      - ./data/logs:/opt/printer_data/logs
