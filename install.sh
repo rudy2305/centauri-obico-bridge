@@ -70,7 +70,7 @@ while [ $# -gt 0 ]; do
     --yes|-y) ASSUME_YES=1; shift ;;
     --link) DO_LINK=1; shift ;;
     --status) DO_STATUS=1; shift ;;
-    --help|-h) sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    --help|-h) sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) die "Unknown option: $1 (use --help)" ;;
   esac
 done
