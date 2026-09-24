@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
     # The agent needs host networking for Janus/WebRTC and to reach the bridge
     # on 127.0.0.1:7125. privileged is required by the upstream image.
-    network_mode: host
+    #network_mode: host
     privileged: true
     depends_on:
       centauri-bridge:
