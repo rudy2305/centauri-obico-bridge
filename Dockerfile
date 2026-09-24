@@ -10,4 +10,3 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 7125 8080
 
 CMD ["python", "app.py"]
-CMD ["./install.sh"]
