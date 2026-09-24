@@ -53,12 +53,12 @@ dc() { "${DC[@]}" "$@"; }
 # Arguments
 # --------------------------------------------------------------------------- #
 
-PRINTER_IP=""
-OBICO_URL=""
+PRINTER_IP="centauri-carbon.home"
+OBICO_URL="http://leonlopeznas.home:3334"
 BRIDGE_ONLY=0
 ASSUME_YES=0
-DO_LINK=0
-DO_STATUS=0
+DO_LINK=1
+DO_STATUS=1
 
 while [ $# -gt 0 ]; do
   case "$1" in
