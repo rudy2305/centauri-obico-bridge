@@ -19,13 +19,13 @@ services:
     env_file:
       - .env
     environment:
-      MOONRAKER_PORT: "7125"
-      POLL_INTERVAL: "2"
+      MOONRAKER_PORT: 7125
+      POLL_INTERVAL: 2
       SDCP_RAW_LOG: /data/sdcp_raw.jsonl
     ports:
-      - "7125:7125"
+      - 7125:7125
     volumes:
-      - ./data/bridge:/data
+      - bridge_data:/data
     healthcheck:
       test:
         - CMD-SHELL
@@ -49,5 +49,7 @@ services:
       centauri-bridge:
         condition: service_healthy
     volumes:
-      - ./config:/opt/printer_data/config
-      - ./data/logs:/opt/printer_data/logs
+      - moonraker_data:/opt/printer_data 
+volumes:
+  bridge_data:
+  moonraker_data:
