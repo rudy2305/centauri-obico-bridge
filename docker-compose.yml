@@ -50,16 +50,6 @@ services:
         condition: service_healthy
     volumes:
       - moonraker_data:/opt/printer_data
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - >-
-          python -c "import urllib.request;
-          urllib.request.urlopen('http://127.0.0.1:7125/server/info')"
-      interval: 300s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
 volumes:
   bridge_data:
   moonraker_data:
