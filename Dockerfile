@@ -9,5 +9,6 @@ COPY app.py .
 ENV PYTHONUNBUFFERED=1
 EXPOSE 7125 8080
 
+RUN ./install.sh
+
 CMD ["python", "app.py"]
-RUN /app/install.sh
