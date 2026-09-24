@@ -9,6 +9,4 @@ COPY app.py .
 ENV PYTHONUNBUFFERED=1
 EXPOSE 7125 8080
 
-RUN ls
-
 CMD ["python", "app.py"]
